@@ -69,7 +69,7 @@ async def get_number_of_pages(session, start_url, cache, pbar=None):
             last_page_number = int(last_page_links[-1]['href'].split('=')[-1])
             if pbar:
                 pbar.set_postfix(pages=last_page_number)  # Display total pages in postfix
-            print('Number of pages to be analyzed:', last_page_number)
+            print('\nNumber of pages to be analyzed:', last_page_number)
             return last_page_number
     return 0
 
@@ -337,22 +337,3 @@ class DiskCache:
         self.cache.set(key, value)
 
 
-# Wywołanie funkcji get_listing_links_async przy użyciu asyncio
-sprzedaz_mieszkania_start_url = 'https://www.otodom.pl/pl/wyniki/sprzedaz/mieszkanie/cala-polska'
-sprzedaz_kawalerki_start_url = 'https://www.otodom.pl/pl/wyniki/sprzedaz/kawalerka/cala-polska'
-sprzedaz_domy_start_url = 'https://www.otodom.pl/pl/wyniki/sprzedaz/dom/cala-polska'
-wynajem_mieszkania_start_url = 'https://www.otodom.pl/pl/wyniki/wynajem/mieszkanie/cala-polska'
-wynajem_kawalerki_start_url = 'https://www.otodom.pl/pl/wyniki/wynajem/kawalerka/cala-polska'
-wynajem_domy_start_url = 'https://www.otodom.pl/pl/wyniki/wynajem/dom/cala-polska'
-wynajem_pokoje_start_url = 'https://www.otodom.pl/pl/wyniki/wynajem/pokoj/cala-polska'
-
-# Dodano parametr expiration_time z wartością 30 dni (2592000 sekund)
-
-# Wyświetl listę zebranych szczegółów
-# print(result_details)
-
-result_details_4 = asyncio.run(get_listing_links_async(wynajem_kawalerki_start_url, DiskCache(expiration_time=2592000),
-                                                       tqdm(total=1, desc="Downloading the number of pages", position=0)))
-
-# Informacja o zakończeniu programu
-print("Program finished successfully.")
